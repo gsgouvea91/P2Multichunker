@@ -30,7 +30,9 @@ Creative Commons
 
 _Attribution-NonCommercial 4.0 International_
 
+
 _You are free to:_
+
 **Share** — copy and redistribute the material in any medium or format
 **Adapt** — remix, transform, and build upon the material
 
