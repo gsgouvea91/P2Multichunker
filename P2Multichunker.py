@@ -84,6 +84,7 @@ class Controle:
         with open('data.json') as json_file:
             controle.data = json.load(json_file)
             text = controle.data['vpk_path']
+            print(text)
             return text
         
     def startupCheck(self):
