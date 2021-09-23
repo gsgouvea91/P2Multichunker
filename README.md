@@ -24,6 +24,14 @@ An easy tool to pack your mod assets into proper subdivided vpk's.
 	
 		*Generates txt file with a list of all your non-packed assets
 			
+  4- Changes the prefix your generated vpk files will have, the default is "pak01".
+
+		*Manages the name of your generated vpk's.
+		
+  5- Manages the extensions that will be scanned for inclusion in your responsefile.
+        
+		*You can ADD or REMOVE extensions that will be inlcuded in your 
+		 For easy problems handling this is reseted everytime you open the program
 
 //CC BY-NC 4.0//
 Creative Commons
