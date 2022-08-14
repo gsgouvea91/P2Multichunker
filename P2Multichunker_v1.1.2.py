@@ -142,12 +142,14 @@ class Controle:
         print(self.get_path()+"\n")
         choice = input("Do you wish to update y/n?: ")
         if choice == 'y' or choice == 'Y':
+            controle.data_insert("vpk_path","")
             txt = """Enter VPK path:"""
             vpk_path = input(txt)
             isFile = os.path.isdir(vpk_path)
             if isFile == True:
-                vpk_path = vpk_path.replace("\\","\\\\")
-                vpk_path = '"'+vpk_path+'\\\\vpk.exe'+'"'
+                vpk_path = vpk_path.replace('\\','\\')
+                vpk_path = vpk_path+'\\vpk.exe'
+                print (vpk_path)
                 controle.data_insert("vpk_path",vpk_path)
                 controle.data_check("vpk_path")
             else:
@@ -202,7 +204,7 @@ class Controle:
         else:
             print("Startup Check: [GENERATING FILE NEEDED]")
             time.sleep(2)
-            controle.data_insert("vpk_path","C:\\\\Program Files (x86)\\\\Steam\\\\steamapps\\\\common\\\\Portal 2\\\\bin\\\\vpk.exe")
+            controle.data_insert("vpk_path","C:\\Program Files (x86)\\Steam\\steamapps\\common\\Portal 2\\bin\\vpk.exe")
             controle.data_insert("vpk_prefix","pak01")
             print("Current VPK Path: " + self.get_path())
             print("Current VPK Prefix: " + self.get_prefix())
@@ -244,26 +246,31 @@ class Controle:
                 print("Please check for spelling errors or insert a vaild prefix")
                 print("\n")
                 controle.changeprefix()
-        else:
-            controle.main()
+         #else:
+             #controle.main()
 
     #GENERATES VPKs
     def p2_multichunk(self):
         system('cls')
+        path = controle.data_check("vpk_path")
+        prefix = controle.data_check("vpk_prefix")
+        vpk_path = str(path)
+        vpk_prefix = str(prefix)
+        
+        system('cls')
         print("CURRENT SEARCH PARAMETERS")
         print(file_types)
         controle.createResponsefile()
-        print("Current VPK Path: " + self.get_path())
-        print("Current VPK Prefix: " + self.get_prefix())
+        print("Current VPK Path: " + vpk_path)
+        print("Current VPK Prefix: " + vpk_prefix)
         print("\n")
 
-        
         #This section generates the batch file and executes (for some reason I could only execute the process like this)
         title_text = 'ECHO !#!#!#!#!===== GENERATING VPK FILES DO NOT CLOSE THIS WINDOW UNTIL ITS DONE =====!#!#!#!#! \n'
         
         directory = join(os.getcwd())
         with open(os.path.join(directory, 'packing.bat'), 'w') as OPATH:
-            OPATH.writelines(['@ECHO OFF \n',title_text,self.get_path(),' -M a '+self.get_prefix()+' @responsefile.txt \n','pause'])
+            OPATH.writelines(['@ECHO OFF \n',title_text,'"'+vpk_path,'"'+' -M a '+vpk_prefix+' @responsefile.txt \n','pause'])
                
         response_p = join(os.getcwd(),"packing.bat")
         subprocess.call([response_p])
